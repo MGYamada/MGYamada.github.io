@@ -1,0 +1,1 @@
+# MGYamada.github.io
