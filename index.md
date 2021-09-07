@@ -2,7 +2,7 @@
 @def tags = ["syntax", "code"]
 
 This is a website on how to use Julia in high-performance computing.
-I will give examples which uses Julia in supercomputers, GPGPUs, etc.
+I will give examples which use Julia in supercomputers, GPGPUs, etc.
 
 # How to use Franklin
 
