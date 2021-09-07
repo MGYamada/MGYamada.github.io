@@ -1,5 +1,8 @@
-@def title = "Franklin Example"
+@def title = "Julia in High-Performance Computing"
 @def tags = ["syntax", "code"]
+
+This is a website on how to use Julia in high-performance computing.
+I will give examples which uses Julia in supercomputers, GPGPUs, etc.
 
 # How to use Franklin
 
