@@ -9,7 +9,7 @@ I will give examples which use Julia in supercomputers, GPGPUs, etc.
 Julia is a modern multi-paradigm language with various extensions
 for OOP and functional programming. This allows us to do a modern
 style programming even in the world of high-performance computing (HPC),
-where usually low-level languages have been used for a long time.
+where usually C/C++ and Fortran have been used for a long time.
 Especially, Julia's implementation of the multiple dispatch is so
 powerful that you can write, for example, a code which works both
 in CPU and GPU at the same time without writing an exclusive code.
