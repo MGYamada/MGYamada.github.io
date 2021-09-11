@@ -1,10 +1,10 @@
 @def title = "Julia in High-Performance Computing"
 @def tags = ["syntax", "code"]
 
+# How to use Julia in High-Performance Computing
+
 This is a website on how to use Julia in high-performance computing.
 I will give examples which use Julia in supercomputers, GPGPUs, etc.
-
-# How to use Julia in High-Performance Computing
 
 Julia is a modern multi-paradigm language with various extensions
 for OOP and functional programming. This allows us to do a modern
