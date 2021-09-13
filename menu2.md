@@ -21,3 +21,11 @@ version `MPI.send` which internally serialize the Julia object.
 MPI.jl also supports the hybrid parallelization. You can request the thread-safe
 level during the initialization. Essentially, you can write a code with both MPI
 parallelization and Julia parallelization. MPI.jl also supports CUDA-aware MPI.
+
+## Basic functions
+
+## "Lower-case" functions
+
+## Type stability
+
+## Load balancing
