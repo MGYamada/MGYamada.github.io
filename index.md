@@ -1,7 +1,7 @@
 @def title = "Julia in High-Performance Computing"
 @def tags = ["syntax", "code"]
 
-# How to use Julia in High-Performance Computing
+# Julia in High-Performance Computing
 
 This is a website on how to use Julia in high-performance computing.
 I will give examples which use Julia in supercomputers, GPGPUs, etc.
