@@ -11,7 +11,7 @@ date = Date(2021, 9, 11)
 
 ## MPI.jl
 
-MPI is a messeag passing API for the distributed memory parallelization.
+MPI is a message passing API for the distributed memory parallelization.
 MPI has many implimentations, such as Intel MPI, Open MPI, etc. One of the
 advantage of MPI.jl is that it supports various implimantations of MPI flexibly,
 and it is easy to use MPI from Julia by preparing functions with almost the same
