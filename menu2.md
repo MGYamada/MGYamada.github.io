@@ -36,10 +36,9 @@ In principle, you can always solve this problem in the following way;
 using MPI
 
 abstract type Rank{N} end
-Root = Rank{0}
 
 function func(rank)
-    if rank <: Root
+    if rank <: Rank{0}
         # job for root
     elseif rank <: Rank{1}
         # job for rank 1
