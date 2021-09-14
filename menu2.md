@@ -28,4 +28,37 @@ parallelization and Julia parallelization. MPI.jl also supports CUDA-aware MPI.
 
 ## Type stability
 
+## Type-stable way to use conditional branches for `rank`
+
+Sometimes the conditional branch for `rank` causes unavoidable type instability.
+In principle, you can always solve this problem in the following way;
+```julia
+using MPI
+
+abstract type Rank{N} end
+Root = Rank{0}
+
+function func(rank)
+    if rank <: Root
+        # job for root
+    elseif rank <: Rank{1}
+        # job for rank 1
+    elseif rank <: Rank{2}
+        # job for rank 2
+    elseif rank <: Rank{3}
+        # job for rank 3
+    end
+end
+
+MPI.Init()
+
+comm = MPI.COMM_WORLD
+rank = Rank{MPI.Comm_rank(comm)}
+func(rank)
+
+MPI.Finalize()
+```
+
+This is how to work around. However, to me it looks like overengineering.
+
 ## Load balancing
