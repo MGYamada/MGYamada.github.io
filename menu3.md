@@ -11,6 +11,11 @@ date = Date(2021, 9, 11)
 
 ## CUDA.jl
 
+CUDA.jl is the Julia version of the CUDA library, which offers a GPGPU plarform for NVIDIA GPU.
+CUDA.jl is not just a wrapper for CUDA functions, but also has functionality to compile the kernel code.
+CUDA.jl completely natively supports Julia, i.e. you can use a native Julia code to write a kernel function
+like a script language. The JIT compilation completely works.
+
 ## How to rewrite a CPU code to a GPU code
 
 * Add `CUDA.` for initialization functions.
@@ -25,6 +30,8 @@ date = Date(2021, 9, 11)
 
 ## Type-unstable way to make CPU and GPU codes coexist
 
+You can easily make CPU and GPU codes coexist in your own code.
+Here's an example.
 ```julia
 using LinearAlgebra
 using CUDA
@@ -47,6 +54,10 @@ function power_iteration(m, gpu)
 end
 ```
 
+The code works in GPU when `gpu = true` and in CPU when `gpu = false`. The point is that you do not have
+to write the main algorithm of the power iteration twice. It is enough to have an `if` syntax in the initialization.
+However, this code is very type-unstable. You can check that by `@code_warntype power_iteration(100, true)` for example.
+
 ## Type-stable way to make CPU and GPU codes coexist
 
 Unfortunately, the above way of switching CPU and GPU by the `Bool` value `gpu` causes type instability.
@@ -66,7 +77,7 @@ Finally, it is enough to add the following one line at the beginning of every fu
 ```julia
 gpu = engine <: GPUEngine
 ```
-This automatically enables us to give CPU or GPU information to the compiler. All the `if gpu` syntax are
+This automatically enables us to give CPU or GPU information to the compiler. Every `if gpu` syntax is
 inferred from the type of inputs, so it is enough to make everything type-stable.
 
 ```julia
