@@ -57,6 +57,36 @@ func(rank)
 
 MPI.Finalize()
 ```
+Or it is better to write in the following way as suggested by [the official document](https://docs.julialang.org/en/v1/manual/performance-tips/#Break-functions-into-multiple-definitions):
+```julia
+using MPI
+
+abstract type Rank{N} end
+
+function func(rank::Type{<:Rank{0}})
+    # job for root
+end
+
+function func(rank::Type{<:Rank{1}})
+    # job for rank 1
+end
+
+function func(rank::Type{<:Rank{2}})
+    # job for rank 2
+end
+
+function func(rank::Type{<:Rank{3}})
+    # job for rank 3
+end
+
+MPI.Init()
+
+comm = MPI.COMM_WORLD
+rank = Rank{MPI.Comm_rank(comm)}
+func(rank)
+
+MPI.Finalize()
+```
 
 This is how to work around. However, to me it looks like overengineering.
 
