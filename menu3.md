@@ -20,11 +20,20 @@ like a script language. The JIT compilation completely works.
 
 * Add `CUDA.` for initialization functions.
     * `zeros(m, n)` -> `CUDA.zeros(Float64, m, n)`
+    * `rand(m, n)` -> `CUDA.rand(Float64, m, n)`
 * Sometimes call a function `CUDA.synchronize()`.
 * Call kernel functions with `@cuda` macro.
 * Replace BLAS with CUBLAS.
 * Replace LAPACK with cuSOLVER or MAGMA. (I recommend MAGMA.)
 * Please be aware where your data are, on CPU, or on GPU.
+
+These are the only things you have to do to make your CPU code work in GPU.
+CUDA versions are included in CUDA.jl for most of the `Base`/`LinearAlgebra` functions.
+Essentially, just by changing initialization functions, Julia's multiple dispatch automatically
+changes CPU methods to GPU methods. Only you have to do is to be aware of types, `Array` or `CuArray`,
+`Vector` or `CuVector`, `Matrix` or `CuMatrix`. This nice switch with the same functions
+thanks to the multiple dispatch paradigm even allows us to write a code which works both in CPU
+and in GPU at the same time.
 
 ## How to write a kernel function
 
