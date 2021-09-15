@@ -31,7 +31,7 @@ parallelization and Julia parallelization. MPI.jl also supports CUDA-aware MPI.
 ## Type-stable way to use conditional branches for `rank`
 
 Sometimes the conditional branch for `rank` causes unavoidable type instability.
-In principle, you can always solve this problem in the following way;
+In principle, you can always solve this problem in the following way:
 ```julia
 using MPI
 

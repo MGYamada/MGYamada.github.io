@@ -24,7 +24,7 @@ like a script language. The JIT compilation completely works.
 * Sometimes call a function `CUDA.synchronize()`.
 * Call kernel functions with `@cuda` macro.
 * Replace BLAS with CUBLAS.
-* Replace LAPACK with cuSOLVER or MAGMA. (I recommend MAGMA.)
+* Replace LAPACK with cuSOLVER or MAGMA. (I recommend [MAGMA](https://icl.cs.utk.edu/magma/).)
 * Please be aware where your data are, on CPU, or on GPU.
 
 These are the only things you have to do to make your CPU code work in GPU.
