@@ -67,11 +67,39 @@ The code works in GPU when `gpu = true` and in CPU when `gpu = false`. The point
 to write the main algorithm of the power iteration twice. It is enough to have an `if` syntax in the initialization.
 However, this code is very type-unstable. You can check that by `@code_warntype power_iteration(100, true)` for example.
 
-## Type-stable way to make CPU and GPU codes coexist
+## Type-stable way to make CPU and GPU codes coexist 1
 
 Unfortunately, the above way of switching CPU and GPU by the `Bool` value `gpu` causes type instability.
-There are many ways to avoid this problem. Here's one simple way to make it type-stable.
+There are many ways to avoid this problem. Here's the simplest way to make it type-stable.
 
+The simplest way is to use a `Val` type. The change is easy, just give a value `gpu` via the `Val(gpu)`.
+```julia
+using LinearAlgebra
+using CUDA
+
+function power_iteration(m, ::Val{gpu}) where gpu
+    if gpu
+        A = CUDA.rand(m, m)
+        b = CUDA.rand(m)
+    else
+        A = rand(Float32, m, m)
+        b = rand(Float32, m)
+    end
+
+    for i in 1:100
+        b .= A * b
+        b ./= norm(b)
+    end
+
+    dot(b, A * b)
+end
+```
+
+Just call this function via `power_iteration(100, Val(true))`. This is the code with the smallest change.
+
+## Type-stable way to make CPU and GPU codes coexist 2
+
+Another solution is the following. It is more complicated but more sophisticated.
 First, define the following abstract types:
 ```julia
 abstract type Engine end

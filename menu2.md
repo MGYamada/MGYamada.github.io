@@ -35,16 +35,14 @@ In principle, you can always solve this problem in the following way:
 ```julia
 using MPI
 
-abstract type Rank{N} end
-
-function func(rank)
-    if rank <: Rank{0}
+function func(::Val{rank}) where rank
+    if rank == 0
         # job for root
-    elseif rank <: Rank{1}
+    elseif rank == 1
         # job for rank 1
-    elseif rank <: Rank{2}
+    elseif rank == 2
         # job for rank 2
-    elseif rank <: Rank{3}
+    elseif rank == 3
         # job for rank 3
     end
 end
@@ -52,8 +50,8 @@ end
 MPI.Init()
 
 comm = MPI.COMM_WORLD
-rank = Rank{MPI.Comm_rank(comm)}
-func(rank)
+rank = MPI.Comm_rank(comm)
+func(Val(rank))
 
 MPI.Finalize()
 ```
@@ -61,33 +59,31 @@ Or it is better to write in the following way as suggested by [the official docu
 ```julia
 using MPI
 
-abstract type Rank{N} end
-
-function func(rank::Type{<:Rank{0}})
+function func(::Val{0})
     # job for root
 end
 
-function func(rank::Type{<:Rank{1}})
+function func(::Val{1})
     # job for rank 1
 end
 
-function func(rank::Type{<:Rank{2}})
+function func(::Val{2})
     # job for rank 2
 end
 
-function func(rank::Type{<:Rank{3}})
+function func(::Val{3})
     # job for rank 3
 end
 
 MPI.Init()
 
 comm = MPI.COMM_WORLD
-rank = Rank{MPI.Comm_rank(comm)}
-func(rank)
+rank = MPI.Comm_rank(comm)
+func(Val(rank))
 
 MPI.Finalize()
 ```
 
-This is how to work around. However, to me it looks like overengineering.
+This is how to work around. In either case, the JIT compiler will compile a necessary part of your code.
 
 ## Load balancing
