@@ -1,5 +1,6 @@
 <main class="outside">
   <div class="box">
+    {{ if hasmenu }}
     <aside class="layout-menu">
       <div class="menu-category">Julia in HPC</div>
       <div class="menu-item {{ispage index.html}}current{{end}}"><a href="/">Home</a></div>
@@ -10,4 +11,5 @@
       <div class="menu-item {{ispage menu4/*}}current{{end}}"><a href="/menu4/">CUDA-aware MPI</a></div>
       <div class="menu-item {{ispage menu5/*}}current{{end}}"><a href="/menu5/">MAGMA.jl</a></div>
     </aside>
+    {{ end }}
     <div class="layout-content">

@@ -16,6 +16,7 @@ generate_rss = true
 website_title = "Julia in High-Performance Computing"
 website_descr = "Using Julia in High-Performance Computing"
 website_url   = "https://mgyamada.github.io/"
+hasmenu       = true
 +++
 
 <!--
